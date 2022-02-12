@@ -1,10 +1,14 @@
 # Logger
-A logger based on [Zap](<https://pkg.go.dev/go.uber.org/zap>)
+A logger based on [Zap](https://github.com/uber-go/zap)
 
+## Installation
+```bash
+go get github.com/goer-project/goer-utils
+```
 ## Usage
 
 ```go
-l := logger.NewChannel(logger.Channel{
+l := logger.NewChannel(&logger.Channel{
     Path:    "/your-path/log.log",
     Level:   "debug",
     Days:    14,
