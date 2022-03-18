@@ -3,8 +3,11 @@ module github.com/goer-project/goer-utils
 go 1.17
 
 require (
+	github.com/gertd/go-pluralize v0.2.0
+	github.com/iancoleman/strcase v0.2.0
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
 	github.com/natefinch/lumberjack v2.0.0+incompatible
+	github.com/spf13/cast v1.4.1
 	go.uber.org/zap v1.21.0
 )
 
