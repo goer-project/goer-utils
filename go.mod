@@ -3,6 +3,7 @@ module github.com/goer-project/goer-utils
 go 1.17
 
 require (
+	github.com/disintegration/imaging v1.6.2
 	github.com/gertd/go-pluralize v0.2.0
 	github.com/iancoleman/strcase v0.2.0
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
@@ -17,6 +18,7 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
+	golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8 // indirect
 	golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 )
