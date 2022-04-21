@@ -2,13 +2,12 @@ package file
 
 import (
 	"mime/multipart"
-	"os"
 	"strings"
 
 	"github.com/disintegration/imaging"
 )
 
-func Resize(dir string, filename string, file *multipart.FileHeader) (string, error) {
+func Resize(dir string, filename string, file *multipart.FileHeader, resizeRatio float64) (string, error) {
 	// Get path
 	dir = strings.TrimRight(dir, "/") + "/"
 	path := dir + filename
@@ -20,24 +19,19 @@ func Resize(dir string, filename string, file *multipart.FileHeader) (string, er
 	}
 
 	// Resize ratio
-	resizeRatio := getResizeRatio(file)
+	if resizeRatio <= 0 {
+		resizeRatio = getResizeRatio(file)
+	}
 	width := float64(src.Bounds().Size().X) * resizeRatio
 
 	// Resize
 	src = imaging.Resize(src, int(width), 0, imaging.Lanczos)
-	resizedPath := dir + RandomFilename(file)
-	err = imaging.Save(src, resizedPath)
+	err = imaging.Save(src, path)
 	if err != nil {
 		return "", err
 	}
 
-	// Remove old file
-	err = os.Remove(path)
-	if err != nil {
-		return "", err
-	}
-
-	return resizedPath, nil
+	return path, nil
 }
 
 func getResizeRatio(file *multipart.FileHeader) float64 {
@@ -64,6 +58,11 @@ func getResizeRatio(file *multipart.FileHeader) float64 {
 	// 1M - 5M
 	if file.Size <= 1024*1024*5 {
 		return 0.3
+	}
+
+	// 5M - 10M
+	if file.Size <= 1024*1024*10 {
+		return 0.2
 	}
 
 	// > 5M
