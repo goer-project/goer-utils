@@ -25,9 +25,12 @@ func Resize(dir string, filename string, file *multipart.FileHeader, resizeRatio
 	}
 	width := float64(src.Bounds().Size().X) * resizeRatio
 
+	// Create compressed directory
+	_ = os.MkdirAll(dir+"compressed", 0755)
+
 	// Resize
 	src = imaging.Resize(src, int(width), 0, imaging.Lanczos)
-	resizedPath := dir + "compressed/" + RandomFilename(file)
+	resizedPath := dir + "compressed/" + filename
 	err = imaging.Save(src, resizedPath)
 	if err != nil {
 		return "", err
